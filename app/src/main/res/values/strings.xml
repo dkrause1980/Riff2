@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">RIFF2</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="navigation_drawer_open">Abrir Menú</string>
+    <string name="navigation_drawer_close">Cerrar Menú</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Menú</string>
+    <string name="action_settings">Cambiar Contraseña</string>
+
+    <string name="nuevo_evento">Nuevo Evento</string>
+    <string name="lista_eventos">Eventos Enviados</string>
+    <string name="salir">Salir</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="legajo">Legajo</string>
+    <string name="id_evento">id evento</string>
+    <string name="calle">Calle</string>
+<string name="altura">Altura</string>
+    <string name="depto">Depto</string>
+    <string name="piso">Piso</string>
+    <string name="estado">Estado</string>
+    <string name="inicio">Inicio</string>
+    <string name="nombre">NOMBRE</string>
+    <string name="apellido">APELLIDO</string>
+    <string name="clave_repetir">REPETIR CONTRASEÑA NUEVA</string>
+    <string name="clave_nueva">CONTRASEÑA NUEVA</string>
+
+
+</resources>

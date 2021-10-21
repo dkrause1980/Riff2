@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/inicio"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/inicio"
+        >
+    </item>
+
+
+    <item
+        android:id="@+id/nuevo_evento"
+        android:icon="@drawable/ic_baseline_create_24"
+        android:title="@string/nuevo_evento">
+
+    </item>
+    <item
+        android:id="@+id/lista_eventos"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="@string/lista_eventos">
+
+    </item>
+    <item
+        android:id="@+id/config_user"
+        android:icon="@drawable/ic_baseline_miscellaneous_services_24"
+        android:title="@string/action_settings">
+
+    </item>
+
+    <item
+        android:id="@+id/salir"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="@string/salir">
+
+    </item>
+
+
+</menu>

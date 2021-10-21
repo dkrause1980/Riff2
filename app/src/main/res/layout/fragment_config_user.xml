@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Config_User">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/ic_baseline_account_box_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_baseline_contacts_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="124dp"
+            android:src="@drawable/ic_baseline_vpn_key_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_baseline_vpn_key_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+        <EditText
+            android:id="@+id/cc_et_legajo"
+            android:layout_width="270dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="100dp"
+            android:capitalize="none"
+            android:clickable="false"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/cc_et_nombre"
+            android:layout_width="270dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="40dp"
+            android:clickable="false"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_et_legajo" />
+
+        <EditText
+            android:id="@+id/cc_et_apellido"
+            android:layout_width="270dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_et_nombre" />
+
+        <EditText
+            android:id="@+id/cc_et_clave_nueva"
+            android:layout_width="270dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/clave_nueva"
+            android:inputType="textPassword"
+            android:maxLength="@integer/clave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_et_apellido" />
+
+        <EditText
+            android:id="@+id/cc_et_repetir"
+            android:layout_width="270dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/clave_repetir"
+            android:inputType="textPassword"
+            android:maxLength="@integer/clave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_et_clave_nueva" />
+
+        <Button
+            android:id="@+id/cc_bt_cambiar"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="92dp"
+            android:background="@drawable/rounded_corner"
+            android:text="CAMBIAR"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cc_et_repetir" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
