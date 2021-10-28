@@ -1,9 +1,8 @@
 package com.example.riff2;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,85 +15,67 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.riff2.interfaces.EventosAPI;
 import com.example.riff2.models.Evento;
+import com.example.riff2.models.Retro;
 
-import org.jetbrains.annotations.NotNull;
-
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Lista_Eventos extends Fragment {
 
-    private RecyclerView recyclerView;
-    private View view;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private List<Evento> lista_eventos;
-
+    RecyclerView recyclerView;
+    View view;
+    RecyclerAdapter recyclerAdapter;
+    List<Evento> eventList;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_lista_eventos, container, false);
         recyclerView = view.findViewById(R.id.lista_eventos);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        Context context = getContext();
-        adapter = new RecyclerAdapter();
-        recyclerView.setAdapter(adapter);
-        return view;
-    }
+        recyclerAdapter = new RecyclerAdapter(getContext(),eventList);
+        recyclerView.setAdapter(recyclerAdapter);
 
-    public List<Evento> getMy_eventos() {
-
-        //SharedPreferences preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        String legajo = "604154";//preferences.getString("legajo","000000");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.231:5000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        SharedPreferences preferences = getActivity().getSharedPreferences("credenciales",Context.MODE_PRIVATE);
+        String legajo = preferences.getString("legajo","");
+        Retrofit retrofit = Retro.get_retrofit();
         EventosAPI eventosAPI = retrofit.create(EventosAPI.class);
         Call<List<Evento>> call = eventosAPI.find(legajo);
-        System.out.println(call.toString());
         call.enqueue(new Callback<List<Evento>>() {
             @Override
             public void onResponse(Call<List<Evento>> call, Response<List<Evento>> response) {
-                try {
-                    if (response.isSuccessful()) {
-                        lista_eventos = response.body();
-                        for (Evento e : lista_eventos) {
-
-                            System.out.println(e.getId_evento() + "-->" + e.getCalle() + "-->" + e.getNumero() + "-->" + e.getDesc_estado());
-
-                        }
-                    } else {
-
-                        System.out.println("Error: " + response.code());
+                eventList = response.body();
+                Collections.sort(eventList, new Comparator<Evento>() {
+                    @Override
+                    public int compare(Evento o1, Evento o2) {
+                        return new Integer(o2.getId_evento()).compareTo(new Integer(o1.getId_evento()));
                     }
-                }catch (Exception ex){
-                    Log.d("Excepcion","Excepcion:"+ex.getMessage());
-                }
-
-
+                });
+                recyclerAdapter.setEventList(eventList);
             }
 
             @Override
             public void onFailure(Call<List<Evento>> call, Throwable t) {
 
-                System.out.println("Error on Failure: "+t.getMessage());
-
             }
         });
 
-        return lista_eventos;
+
+
+
+
+        return view;
     }
 
 

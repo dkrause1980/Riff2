@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.riff2.interfaces.EventosAPI;
 import com.example.riff2.models.Evento;
+import com.example.riff2.models.Retro;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -207,8 +208,15 @@ public class Nuevo_Evento extends Fragment implements View.OnClickListener{
 
                 if(locationManager!=null){
 
+                    if(location!=null){
                     pt_latitud.setText(String.valueOf(location.getLatitude()));
                     pt_longitud.setText(String.valueOf(location.getLongitude()));
+                    }else{
+
+                        pt_latitud.setText("-31.274181");
+                        pt_longitud.setText("-61.475117");
+
+                    }
 
                 }
 
@@ -312,7 +320,7 @@ public class Nuevo_Evento extends Fragment implements View.OnClickListener{
 
             while ((linea = br.readLine())!=null){
                 int i = 0;
-                String val= linea.replace( ",","-");
+                String val= linea.replace( ","," - ");
                 datos.add(i,val);
                 i++;
             }
@@ -330,9 +338,7 @@ public class Nuevo_Evento extends Fragment implements View.OnClickListener{
 
     public void postEv(Evento evento){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.231:5000/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = Retro.get_retrofit();
         EventosAPI eventosAPI = retrofit.create(EventosAPI.class);
         Call<Evento> call = eventosAPI.postEvento(evento);
         call.enqueue(new Callback<Evento>() {

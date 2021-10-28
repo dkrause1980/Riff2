@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
         android:id="@+id/card_event"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/tarjetas"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/tarjetas"
+        app:cardCornerRadius="10dp"
 
         >
 
@@ -21,14 +21,14 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_id"
+                android:id="@+id/mytv_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="64dp"
-                android:fontFamily="monospace"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif"
                 android:text="ID"
-                android:textSize="24sp"
+                android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,10 +37,11 @@
                 android:id="@+id/tv_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="monospace"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
                 android:text="FECHA"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +50,11 @@
                 android:id="@+id/tv_calle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="monospace"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
                 android:text="CALLE"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_fecha" />
@@ -61,10 +63,11 @@
                 android:id="@+id/tv_estado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="monospace"
+                android:layout_marginStart="112dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif"
                 android:text="ESTADO"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -73,13 +76,14 @@
                 android:id="@+id/tv_altura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="144dp"
-                android:layout_marginTop="63dp"
-                android:fontFamily="monospace"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="68dp"
+                android:fontFamily="sans-serif"
                 android:text="ALTURA"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_calle"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fecha" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

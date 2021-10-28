@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.riff2.interfaces.EmpleadosAPI;
 import com.example.riff2.models.Empleado;
+import com.example.riff2.models.Retro;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,13 +61,13 @@ public class Config_User extends Fragment implements View.OnClickListener{
 
     public void cambiarClave(String clave){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.231:5000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = Retro.get_retrofit();
 
         EmpleadosAPI empleadosAPI = retrofit.create(EmpleadosAPI.class);
-        Call<Empleado> call = empleadosAPI.change(et_legajo.getText().toString(),clave);
+        Empleado empleado = new Empleado();
+        empleado.setContrasenia(clave);
+
+        Call<Empleado> call = empleadosAPI.change(et_legajo.getText().toString(),empleado);
         call.enqueue(new Callback<Empleado>() {
             @Override
             public void onResponse(Call<Empleado> call, Response<Empleado> response) {
@@ -85,6 +86,8 @@ public class Config_User extends Fragment implements View.OnClickListener{
             @Override
             public void onFailure(Call<Empleado> call, Throwable t) {
 
+
+
                 Toast.makeText(getContext(),"Error al conectar: "+t.getMessage(),Toast.LENGTH_LONG).show();
 
 
@@ -101,7 +104,8 @@ public class Config_User extends Fragment implements View.OnClickListener{
 
             if(et_clave.getText().length()<4){
                 Toast.makeText(getContext(),"La clave debe ser superior a 4 caracteres",Toast.LENGTH_LONG).show();
-            }else if(!et_clave.getText().equals(et_repClave.getText())){
+            }else if(!et_clave.getText().toString().equals(et_repClave.getText().toString())){
+
                 Toast.makeText(getContext(),"Las claves no coinciden",Toast.LENGTH_LONG).show();
             }else {
 

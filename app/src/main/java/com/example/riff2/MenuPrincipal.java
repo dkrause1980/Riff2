@@ -75,6 +75,9 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
             case (R.id.config_user):
                 fragmentTransaction.replace(R.id.container, new Config_User()).commit();
                 break;
+            case (R.id.salir):
+                finish();
+                break;
         }
         setTitle(item.getTitle());
         drawerLayout.closeDrawers();

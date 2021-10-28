@@ -26,6 +26,7 @@ import com.example.riff2.interfaces.EventosAPI;
 import com.example.riff2.models.CodigoEvento;
 import com.example.riff2.models.Empleado;
 import com.example.riff2.models.Evento;
+import com.example.riff2.models.Retro;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -122,9 +123,7 @@ public class Login extends AppCompatActivity {
     public void logueo(String legajo){
 
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.231:5000/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit= Retro.get_retrofit();
 
         EmpleadosAPI llamadasAPI = retrofit.create(EmpleadosAPI.class);
         Call<Empleado> call = llamadasAPI.find(legajo);
@@ -137,6 +136,7 @@ public class Login extends AppCompatActivity {
                         if(e.getContrasenia().equals(password.getText().toString())){
                             //Toast.makeText(MainActivity.this,"Ingresando",Toast.LENGTH_SHORT).show();
                             guardarPreferences(e.getNombre(),aSwitch.isChecked(),e.getLegajo(),e.getApellido());
+                            System.out.println(e.getApellido());
 
                             listaCodigos();
 
@@ -176,9 +176,7 @@ public class Login extends AppCompatActivity {
     public List<CodigoEvento> listaCodigos(){
 
         ArrayList<String> codes=new ArrayList<String>();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.231:5000/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = Retro.get_retrofit();
         CodigosAPI codigosAPI = retrofit.create(CodigosAPI.class);
         Call<List<CodigoEvento>> call = codigosAPI.getCodigos();
         List<CodigoEvento> ce = null;
