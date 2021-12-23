@@ -16,4 +16,8 @@ public interface EmpleadosAPI {
 
     @PATCH("/login/{legajo}")
     Call<Empleado> change(@Path("legajo") String legajo, @Body Empleado empleado);
+
+    @PUT("/olvida_clave/{legajo}")
+    Call<Empleado> reset(@Path("legajo") String legajo);
+
 }

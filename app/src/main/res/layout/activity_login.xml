@@ -69,6 +69,17 @@
         android:textColor="@color/white"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corner"
+        android:fontFamily="sans-serif"
+        android:text="Reset Password"
+        android:textColor="@color/white"
+        android:textStyle="bold"  />
+
     <Switch
         android:id="@+id/switch1"
         android:layout_width="280dp"

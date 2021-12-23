@@ -7,6 +7,17 @@ public class Empleado {
     private String contrasenia;
     private String apellido;
     private String nivel;
+    private  int activo;
+
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
+
 
     public String getNombre() {
         return nombre;

@@ -123,7 +123,7 @@ public class Nuevo_Evento extends Fragment implements View.OnClickListener{
                         String[] valor = seleccion.split("-");
                         Toast.makeText(getContext(),"Seleccionó: "+valor[0],Toast.LENGTH_LONG).show();
                         pt_tipo_evento.setText(valor[1]+"-"+valor[2]);
-                        id_evento = Integer.parseInt(valor[0]);
+                        id_evento = Integer.parseInt(valor[0].trim());
                         Log.d("id_evento",String.valueOf(id_evento));
                     }
                 });

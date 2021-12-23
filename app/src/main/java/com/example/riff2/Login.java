@@ -51,7 +51,7 @@ import android.os.Bundle;
 public class Login extends AppCompatActivity {
 
     EditText user,password;
-    Button btnIngresar, btnCancelar;
+    Button btnIngresar, btnCancelar, btnReset;
     public static Switch aSwitch;
     SharedPreferences preferences;
     private static final String STRING_PREFERENCE = "credenciales";
@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity {
         btnIngresar = findViewById(R.id.button);
         btnCancelar = findViewById(R.id.button2);
         aSwitch = (Switch) findViewById(R.id.switch1);
+        btnReset = findViewById(R.id.button3);
 
         if(obtenerSwitch()){
             System.out.println(preferences.getBoolean("sesion",false));
@@ -91,6 +92,51 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
 
                 finish();
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset_pass(user.getText().toString());
+            }
+        });
+
+    }
+
+    private void reset_pass(String legajo) {
+
+        Retrofit retrofit= Retro.get_retrofit();
+
+        EmpleadosAPI llamadasAPI = retrofit.create(EmpleadosAPI.class);
+        Call<Empleado> call = llamadasAPI.reset(legajo);
+        call.enqueue(new Callback<Empleado>() {
+            @Override
+            public void onResponse(Call<Empleado> call, Response<Empleado> response) {
+                try{
+                    if(response.isSuccessful()){
+                        Toast.makeText(Login.this,"La nueva contraseña es su dni",Toast.LENGTH_LONG).show();
+                    }
+
+                }catch (Exception ex){
+                    Toast.makeText(Login.this,"Verifique usuario. Error: "+response.code(),Toast.LENGTH_SHORT).show();
+                    System.out.println(ex.getMessage()+" "+password.getText().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Empleado> call, Throwable t) {
+                if(t instanceof IOException) {
+                    Toast toast = Toast.makeText(Login.this, "Fallo en la conexion", Toast.LENGTH_SHORT);
+                    Log.d("mensaje",t.getMessage());
+
+                    toast.show();
+                }
+                else{
+
+                    Toast.makeText(Login.this, "Verificar legajo", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -133,7 +179,7 @@ public class Login extends AppCompatActivity {
                 try{
                     if(response.isSuccessful()){
                         Empleado e = response.body();
-                        if(e.getContrasenia().equals(password.getText().toString())){
+                        if(e.getContrasenia().equals(password.getText().toString()) && e.getActivo()==1){
                             //Toast.makeText(MainActivity.this,"Ingresando",Toast.LENGTH_SHORT).show();
                             guardarPreferences(e.getNombre(),aSwitch.isChecked(),e.getLegajo(),e.getApellido());
                             System.out.println(e.getApellido());
@@ -203,8 +249,11 @@ public class Login extends AppCompatActivity {
                         //bw.write("Codigo,Descripcion");
                         bw.newLine();
                         for(int i=0;i<ce.size();i++){
-                            bw.write(ce.get(i).getId_tipo_falla()+","+ce.get(i).getCodigo()+","+ce.get(i).getDescripcion());
-                            bw.newLine();
+                            //ce.get(i).getId_tipo_falla()+","+
+                            if(ce.get(i).getActivo()!=0) {
+                                bw.write(ce.get(i).getId_tipo_falla()+","+ce.get(i).getCodigo() + "," + ce.get(i).getDescripcion());
+                                bw.newLine();
+                            }
                         }
                         Log.d("tag1","ARCHIVO ALMACENADO EN : "+file.getAbsolutePath());
                         bw.close();
